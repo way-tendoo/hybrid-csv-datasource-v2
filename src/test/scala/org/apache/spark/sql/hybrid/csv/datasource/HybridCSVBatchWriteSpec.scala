@@ -10,10 +10,12 @@ class HybridCSVBatchWriteSpec extends AnyFlatSpec with should.Matchers {
 
   import spark.implicits._
 
-  "write batch df" should "work" in {
-    val df = Seq(("Maksim", "Kazantsev", 28), ("Ivan", "Ivanov", 23)).toDF("name", "surname", "age")
-
-    df.write.format("hybrid-csv").mode("overwrite").option("header", value = false).save("./src/main/resources/users")
+  "write batch df with schema" should "work" in {
+    val users = User.Users.toDF()
+    users.write
+      .format("hybrid-csv")
+      .mode("overwrite")
+      .option("header", value = false)
+      .save("./src/test/resources/users")
   }
-
 }

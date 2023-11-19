@@ -1,12 +1,11 @@
-package org.apache.spark.sql.hybrid.csv.datasource
+package org.apache.spark.sql.hybrid.csv.datasource.sink
 
-import org.apache.hadoop.mapreduce.{ Job, TaskAttemptContext }
+import org.apache.hadoop.mapreduce.Job
 import org.apache.spark.sql.connector.write.LogicalWriteInfo
-import org.apache.spark.sql.execution.datasources.{ OutputWriter, OutputWriterFactory }
+import org.apache.spark.sql.execution.datasources.OutputWriterFactory
 import org.apache.spark.sql.execution.datasources.v2.FileWrite
-import org.apache.spark.sql.hybrid.csv.datasource.model.HybridCSVOptions
 import org.apache.spark.sql.internal.SQLConf
-import org.apache.spark.sql.types.{ DataType, StructType }
+import org.apache.spark.sql.types.{DataType, StructType}
 
 case class HybridCSVWrite(
   formatName: String,

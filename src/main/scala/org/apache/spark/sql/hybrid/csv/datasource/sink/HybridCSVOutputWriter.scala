@@ -1,8 +1,9 @@
-package org.apache.spark.sql.hybrid.csv.datasource
+package org.apache.spark.sql.hybrid.csv.datasource.sink
 
 import org.apache.hadoop.fs.Path
 import org.apache.hadoop.mapreduce.TaskAttemptContext
 import org.apache.spark.sql.catalyst.InternalRow
+import org.apache.spark.sql.catalyst.csv.UnivocityGenerator
 import org.apache.spark.sql.execution.datasources.{CodecStreams, OutputWriter}
 import org.apache.spark.sql.hybrid.csv.datasource.model.HybridCSVOptions
 import org.apache.spark.sql.types._
@@ -30,13 +31,13 @@ class HybridCSVOutputWriter(
       .toSeq(schema)
       .zip(schema)
       .map { case (value, sf) => value -> sf.dataType }
-      .map(rowToString)
+      .map(fieldToString)
       .mkString(options.delimiter)
     writer.write(output)
     writer.write(options.separator)
   }
 
-  private def rowToString(field: (Any, DataType)): String = field match {
+  private def fieldToString(field: (Any, DataType)): String = field match {
     case (null, _)                               => ""
     case (jInt: Integer, _: IntegerType)         => jInt.toString
     case (jLong: JLong, _: LongType)             => jLong.toString

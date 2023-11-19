@@ -4,6 +4,7 @@ import org.apache.hadoop.fs.FileStatus
 import org.apache.hadoop.mapreduce.Job
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.execution.datasources.{FileFormat, OutputWriterFactory}
+import org.apache.spark.sql.hybrid.csv.datasource.sink.HybridCSVOutputWriterFactory
 import org.apache.spark.sql.types.StructType
 
 case class HybridCSVFileFormat() extends FileFormat {

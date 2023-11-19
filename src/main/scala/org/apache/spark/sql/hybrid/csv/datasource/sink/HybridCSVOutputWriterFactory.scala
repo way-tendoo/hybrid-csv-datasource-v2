@@ -1,7 +1,7 @@
-package org.apache.spark.sql.hybrid.csv.datasource
+package org.apache.spark.sql.hybrid.csv.datasource.sink
 
 import org.apache.hadoop.mapreduce.TaskAttemptContext
-import org.apache.spark.sql.execution.datasources.{ OutputWriter, OutputWriterFactory }
+import org.apache.spark.sql.execution.datasources.{OutputWriter, OutputWriterFactory}
 import org.apache.spark.sql.hybrid.csv.datasource.model.HybridCSVOptions
 import org.apache.spark.sql.types.StructType
 

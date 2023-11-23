@@ -12,11 +12,12 @@ import org.apache.spark.util.SerializableConfiguration
 
 class HybridCSVPartitionReaderFactory(
   schema: StructType,
+  readPartitionSchema: StructType,
   options: CSVOptions,
   conf: Broadcast[SerializableConfiguration])
     extends FilePartitionReaderFactory {
   override def buildReader(file: PartitionedFile): PartitionReader[InternalRow] = {
-    val parser      = new UnivocityParser(schema, options)
+    val parser      = new UnivocityParser(schema, readPartitionSchema, options)
     val linesReader = new HadoopFileLinesReader(file, conf.value.value)
     val lines = linesReader.map { line =>
       new String(line.getBytes, 0, line.getLength, parser.options.charset)

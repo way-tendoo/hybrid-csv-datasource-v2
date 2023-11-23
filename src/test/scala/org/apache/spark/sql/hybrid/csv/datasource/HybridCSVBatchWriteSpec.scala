@@ -15,7 +15,7 @@ class HybridCSVBatchWriteSpec extends AnyFlatSpec with should.Matchers {
     users.write
       .format("hybrid-csv")
       .mode("overwrite")
-      .option("header", value = false)
+      .option("header", value = true)
       .save("./src/test/resources/users")
   }
 }

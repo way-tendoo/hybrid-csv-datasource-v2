@@ -1,6 +1,5 @@
 package org.apache.spark.sql.hybrid.csv.datasource.source
 
-import org.apache.spark.broadcast.Broadcast
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.catalyst.csv.CSVOptions
 import org.apache.spark.sql.catalyst.expressions.Expression
@@ -33,6 +32,6 @@ case class HybridCSVScan(
       new CSVOptions(caseSensitiveMap, columnPruning, TimeZone.getDefault.getID, columnNameOfCorruptRecord)
     val hadoopConf    = sparkSession.sessionState.newHadoopConfWithOptions(caseSensitiveMap)
     val broadcastConf = sparkSession.sparkContext.broadcast(new SerializableConfiguration(hadoopConf))
-    new HybridCSVPartitionReaderFactory(dataSchema, csvOptions, broadcastConf)
+    new HybridCSVPartitionReaderFactory(dataSchema, readDataSchema, csvOptions, broadcastConf)
   }
 }
